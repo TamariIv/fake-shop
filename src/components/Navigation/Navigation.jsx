@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import styles from './Navigation.module.css';
+import styles from './Navigation.module.css';
 
 const Navigation = () => {
     return (
-        <div>
+        <div className={styles.sidebar}>
                 <nav>
-                    <ul>
-                        <li>
+                    <ul className={styles.list}>
+                        <li className={styles.item}>
                             <Link to="/">Home</Link>
                         </li>
-                        <li>
+                        <li className={styles.item}>
                             <Link to="/jewelry">Jewelry</Link>
                         </li>
-                        <li>
+                        <li className={styles.item}>
                             <Link to="/electronics">Electronics</Link>
                         </li>
                     </ul>

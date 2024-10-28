@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Product from '../Product/Product';
-
+import styles from './Jewelry.module.css';
 
 const Jewelry = () => {
 
@@ -32,7 +32,7 @@ const Jewelry = () => {
     if (error) return <div>Error: {error}</div>; // Error handling
 
     return (
-        <div>
+        <div className={styles.products}>
             {products.map(product => (
                 <Product key={product.id} product={product} />
             ))}
