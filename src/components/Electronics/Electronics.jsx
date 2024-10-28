@@ -11,20 +11,19 @@ const Electronics = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            getProductsElectronics()
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data);
-                setLoading(false); 
-            })
-            .catch(error => {
-                setError(error.message);
-                setLoading(false);
-            })
+            try {
+                const data = await getProductsElectronics(); // Call the updated service function
+                setProducts(data); // Update state with fetched products
+            } catch (error) {
+                setError(error.message); // Set error message if fetch fails
+            } finally {
+                setLoading(false); // Set loading to false after fetch is complete
+            }
         };
 
-        fetchProducts(); 
-    }, []); 
+        fetchProducts(); // Call the function to fetch products
+    }, []); // Empty dependency array ensures this runs only once
+    
     
     if (loading) return <div>Loading...</div>; // Loading state
     if (error) return <div>Error: {error}</div>;
