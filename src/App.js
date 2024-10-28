@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Jewelry from './components/Jewelry/Jewelry';
 import Electronics from './components/Electronics/Electronics';
+import Books from './components/Books/Books';
 import styles from './App.css';
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/jewelry" element={<Jewelry />} />
             <Route path="/electronics" element={<Electronics />} />
+            <Route path="/books" element={<Books />} />
+
           </Routes>
         </div>
       </Router>

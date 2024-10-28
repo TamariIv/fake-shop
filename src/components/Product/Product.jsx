@@ -2,8 +2,6 @@ import React from 'react';
 import styles from './Product.module.css'
 
 const Product = ({ product }) => {
-    console.log("here"); 
-    console.log(product.id);
     return (
         <div className={styles.product}>
             <h2>{product.title}</h2>
