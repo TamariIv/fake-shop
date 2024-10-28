@@ -2,41 +2,43 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Product from '../Product/Product';
 import styles from './Jewelry.module.css';
+import { getProductsJewelry } from '../../service';
 
 const Jewelry = () => {
 
-    const [products, setProducts] = useState([]); // State for storing products
-    const [loading, setLoading] = useState(true); // State for loading status
-    const [error, setError] = useState(null); // State for error handling
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
 
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                const response = await fetch('https://fakestoreapi.com/products/category/jewelery');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setProducts(data); // Update state with fetched products
-            } catch (err) {
-                setError(err.message); // Set error message if fetch fails
-            } finally {
-                setLoading(false); // Set loading to false after fetch is complete
-            }
+            getProductsJewelry()
+            .then(response => response.json())
+            .then(data => {
+                setProducts(data);
+                setLoading(false); 
+            })
+            .catch(error => {
+                setError(error.message);
+                setLoading(false);
+            })
         };
 
-        fetchProducts(); // Call the function to fetch products
-    }, []); // Empty dependency array ensures this runs only once
+        fetchProducts(); 
+    }, []); 
 
-    if (loading) return <div>Loading...</div>; // Loading state
-    if (error) return <div>Error: {error}</div>; // Error handling
+    if (loading) return <div>Loading...</div>; 
+    if (error) return <div>Error: {error}</div>; 
 
     return (
+
         <div className={styles.products}>
             {products.map(product => (
                 <Product key={product.id} product={product} />
             ))}
         </div>
+
+
     );
 };
 

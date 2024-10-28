@@ -1,6 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Product from '../Product/Product';
+import styles from './Electronics.module.css';
+import { getProductsElectronics } from '../../service';
 
 const Electronics = () => {
     const [products, setProducts] = useState([]);
@@ -9,28 +11,26 @@ const Electronics = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                const response = await fetch('https://fakestoreapi.com/products/category/electronics');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
+            getProductsElectronics()
+            .then(response => response.json())
+            .then(data => {
                 setProducts(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false); // Set loading to false after fetch is complete
-            }
+                setLoading(false); 
+            })
+            .catch(error => {
+                setError(error.message);
+                setLoading(false);
+            })
         };
 
-        fetchProducts();
-    }, []);
-
+        fetchProducts(); 
+    }, []); 
+    
     if (loading) return <div>Loading...</div>; // Loading state
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <div>
+        <div className={styles.products}>
             {products.map(product => (
                 <Product key={product.id} product={product} />
             ))}

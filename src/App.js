@@ -5,10 +5,14 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Jewelry from './components/Jewelry/Jewelry';
 import Electronics from './components/Electronics/Electronics';
+import styles from './App.css';
 
 function App() {
   return (
     <div className="App">
+      <div className="topbar">
+        <h3>FAKE STORE</h3>
+      </div>
       <Router>
         <div className="wrapper">
           <Navigation />
